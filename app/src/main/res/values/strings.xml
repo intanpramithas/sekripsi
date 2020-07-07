@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">sumcalories</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="button_login">Login</string>
+    <string name="name">Nama</string>
+    <string name="password_conf">Konfirmasi Password</string>
+    <string name="button_register">Register</string>
+    <string name="tv_login">Login</string>
+    <string name="title_home">Home</string>
+    <string name="title_hitung">Hitung Kalori</string>
+    <string name="title_konsumsikalori">Konsumsi Kalori</string>
+    <string name="title_daftarkalori">Daftar Kalori</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="enter_your_data">Masukkan data diri anda</string>
+    <string name="we_will_calculate_your_calory">Kami akan menghitung jumlah kalori anda</string>
+</resources>
