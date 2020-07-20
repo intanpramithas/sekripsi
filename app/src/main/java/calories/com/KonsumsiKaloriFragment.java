@@ -11,9 +11,9 @@ import androidx.fragment.app.Fragment;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class KonsumsiKalori extends Fragment {
+public class KonsumsiKaloriFragment extends Fragment {
 
-    public KonsumsiKalori() {
+    public KonsumsiKaloriFragment() {
         // Required empty public constructor
     }
 

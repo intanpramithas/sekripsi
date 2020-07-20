@@ -50,7 +50,10 @@ public class MainFragment extends Fragment {
                         switchFragment(new HitungKaloriFragment());
                         return true;
                     case R.id.navigation_konsumsikalori:
-                        switchFragment(new KonsumsiKalori());
+                        switchFragment(new KonsumsiKaloriFragment());
+                        return true;
+                    case R.id.navigation_kalorimakanan:
+                        switchFragment(new DaftarKaloriFragment());
                         return true;
                 }
                 return false;

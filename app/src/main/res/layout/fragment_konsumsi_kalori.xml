@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context=".HomeFragment">
 
@@ -200,15 +199,15 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Makan Pagi"
-                        android:textSize="16sp"
-                        android:textStyle="bold"/>
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Anda sepertinya belum makan pagi"
-                        android:textSize="16sp"
-                        android:textStyle="bold"/>
+                        android:textColor="@color/black"
+                        android:textSize="14sp" />
 
                 </LinearLayout>
 
@@ -243,15 +242,15 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Makan Siang"
-                        android:textSize="16sp"
-                        android:textStyle="bold"/>
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Anda sepertinya belum makan siang"
-                        android:textSize="16sp"
-                        android:textStyle="bold"/>
+                        android:textColor="@color/black"
+                        android:textSize="14sp"/>
 
                 </LinearLayout>
 
@@ -287,14 +286,14 @@
                         android:layout_height="wrap_content"
                         android:text="Makan Malam"
                         android:textSize="16sp"
-                        android:textStyle="bold"/>
+                        android:textColor="@color/black"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Anda sepertinya belum makan malam"
-                        android:textSize="16sp"
-                        android:textStyle="bold"/>
+                        android:textSize="14sp"
+                        android:textColor="@color/black"/>
 
                 </LinearLayout>
 
@@ -330,14 +329,14 @@
                         android:layout_height="wrap_content"
                         android:text="Cemilan / Snack"
                         android:textSize="16sp"
-                        android:textStyle="bold"/>
+                        android:textColor="@color/black"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Anda sepertinya belum makan cemilan"
-                        android:textSize="16sp"
-                        android:textStyle="bold"/>
+                        android:textSize="14sp"
+                        android:textColor="@color/black"/>
 
                 </LinearLayout>
 

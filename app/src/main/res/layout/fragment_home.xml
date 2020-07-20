@@ -101,6 +101,7 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/tv_batas_kalori_tubuh"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"

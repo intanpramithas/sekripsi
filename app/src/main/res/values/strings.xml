@@ -12,6 +12,13 @@
     <string name="title_konsumsikalori">Konsumsi Kalori</string>
     <string name="title_daftarkalori">Daftar Kalori</string>
 
+    <string-array name="tee">
+        <item>Sangat Jarang Olahraga</item>
+        <item>Jarang Olahraga (1-3 hari / minggu)</item>
+        <item>Normal Olahraga (3-5 hari / minggu)</item>
+        <item>Sering Olahraga (6-7 hari / minggu)</item>
+        <item>Sangat Sering Olahraga (tiap hari bisa 2 kali sehari)</item>
+    </string-array>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="enter_your_data">Masukkan data diri anda</string>
