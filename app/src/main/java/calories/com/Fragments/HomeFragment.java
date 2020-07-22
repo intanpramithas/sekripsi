@@ -1,4 +1,4 @@
-package calories.com;
+package calories.com.Fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,6 +9,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
+import calories.com.R;
 
 public class HomeFragment extends Fragment {
 

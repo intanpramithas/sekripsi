@@ -1,4 +1,4 @@
-package calories.com;
+package calories.com.Adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -14,6 +14,9 @@ import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
+import calories.com.Model.FoodItem;
+import calories.com.R;
+
 
 public class FoodItemListAdapter extends RecyclerView.Adapter<FoodItemListAdapter.ViewHolder> {
     private ArrayList<FoodItem> foodItems;
@@ -27,7 +30,7 @@ public class FoodItemListAdapter extends RecyclerView.Adapter<FoodItemListAdapte
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType){
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_food_category_list, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_food_item_list, parent, false);
         return new ViewHolder(v);
     }
 

@@ -1,4 +1,4 @@
-package calories.com;
+package calories.com.Fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -17,6 +17,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.textfield.TextInputEditText;
+
+import calories.com.R;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -42,6 +44,7 @@ public class HitungKaloriFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_hitung_kalori, container, false);
+
         initView(v);
 
         btn_hitung.setOnClickListener(new View.OnClickListener() {
@@ -57,6 +60,7 @@ public class HitungKaloriFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         setSpinner();
+
     }
 
     public void initView(View rootView) {
@@ -100,7 +104,7 @@ public class HitungKaloriFragment extends Fragment {
             BMR = 66.47 + (13.75 * Integer.parseInt(beratbadan.getText().toString()))
                     + (5 * Integer.parseInt((tinggibadan.getText().toString())))
                     - (6.76 * Integer.parseInt(usia.getText().toString()));
-        } else{
+        } else if(tamp_jeniskelamin == "Perempuan"){
             BMR = 655.1 + (9.56 * Integer.parseInt(beratbadan.getText().toString()))
                     + (1.85 * Integer.parseInt((tinggibadan.getText().toString())))
                     - (4.68 * Integer.parseInt(usia.getText().toString()));
@@ -108,6 +112,7 @@ public class HitungKaloriFragment extends Fragment {
 
         spinnerActivityLevel.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
         {
+            @Override
             public void onItemSelected(AdapterView<?> parent,View view, int pos, long id) {
 
                 if ( spinnerActivityLevel.getSelectedItem().toString().trim().equals("Sangat Jarang Olahraga")) {
@@ -129,7 +134,7 @@ public class HitungKaloriFragment extends Fragment {
                     hasilkalori = BMR;
                 }
             }
-            public void onNothingSelected(AdapterView<?>arg0) {}
+            public void onNothingSelected(AdapterView<?> parent) {}
         });
         Toast.makeText(getActivity(),  hasilkalori + "", Toast.LENGTH_SHORT).show();
 

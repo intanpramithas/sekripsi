@@ -70,21 +70,21 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/tv_food_name" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/mbtn_food_detail"
-            style="@style/Widget.MaterialComponents.Button.TextButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="#6979F8"
-            android:minWidth="0dp"
-            android:minHeight="0dp"
-            android:text="Detail"
-            android:textAllCaps="false"
-            android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/tv_food_calory"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="@+id/tv_food_calory" />
+<!--        <com.google.android.material.button.MaterialButton-->
+<!--            android:id="@+id/mbtn_food_detail"-->
+<!--            style="@style/Widget.MaterialComponents.Button.TextButton"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:background="#6979F8"-->
+<!--            android:minWidth="0dp"-->
+<!--            android:minHeight="0dp"-->
+<!--            android:text="Detail"-->
+<!--            android:textAllCaps="false"-->
+<!--            android:textSize="12sp"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="@+id/tv_food_calory"-->
+<!--            app:layout_constraintHorizontal_bias="1.0"-->
+<!--            app:layout_constraintStart_toStartOf="@+id/tv_food_calory" />-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

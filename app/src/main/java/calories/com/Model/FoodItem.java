@@ -1,4 +1,4 @@
-package calories.com;
+package calories.com.Model;
 
 public class FoodItem {
     private String id;

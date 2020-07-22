@@ -13,6 +13,11 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import calories.com.Fragments.DaftarKaloriFragment;
+import calories.com.Fragments.HitungKaloriFragment;
+import calories.com.Fragments.HomeFragment;
+import calories.com.Fragments.KonsumsiKaloriFragment;
+
 
 public class MainFragment extends Fragment {
 

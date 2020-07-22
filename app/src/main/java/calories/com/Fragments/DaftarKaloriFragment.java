@@ -1,4 +1,4 @@
-package calories.com;
+package calories.com.Fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -15,6 +15,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+
+import calories.com.Adapter.FoodCategoryListAdapter;
+import calories.com.Adapter.FoodItemListAdapter;
+import calories.com.Model.FoodCategory;
+import calories.com.Model.FoodItem;
+import calories.com.R;
 
 public class DaftarKaloriFragment extends Fragment {
 
@@ -105,14 +111,16 @@ public class DaftarKaloriFragment extends Fragment {
     private ArrayList<FoodItem> getFoodItems() {
         ArrayList<FoodItem> foodItems = new ArrayList<>();
 
-        foodItems.add(new FoodItem("", "https://firebasestorage.googleapis.com/v0/b/tantanprojek.appspot.com/o/images%2Fapel_1-removebg-preview%202.png?alt=media&token=b6e5ec33-c9e9-452f-8376-db5cf59fe2d1", "Nasi Putih", "dibuat dari potongan-potongan ayam yang digoreng dengan minya zaitun.", 200));
-        foodItems.add(new FoodItem("", "https://firebasestorage.googleapis.com/v0/b/tantanprojek.appspot.com/o/images%2Fapel_1-removebg-preview%202.png?alt=media&token=b6e5ec33-c9e9-452f-8376-db5cf59fe2d1", "Nasi Goreng", "dibuat dari potongan-potongan ayam yang digoreng dengan minya zaitun.", 300));
-        foodItems.add(new FoodItem("", "", "Nasi Sayur", "dibuat dari potongan-potongan ayam yang digoreng dengan minya zaitun.", 150));
+        foodItems.add(new FoodItem("", "https://firebasestorage.googleapis.com/v0/b/calories-5c69d.appspot.com/o/nasgor%20(2).png?alt=media&token=3fca6792-cddf-4f21-86a5-2167ea5f262e", "Nasi Goreng", "Nasi goreng dengan potongan sayur.", 200));
+        foodItems.add(new FoodItem("", "https://firebasestorage.googleapis.com/v0/b/calories-5c69d.appspot.com/o/nasi.png?alt=media&token=4967ab76-ef5a-4b0f-b85d-95561c4c69b0", "Nasi Putih", "Dibuat dari beras pilihan.", 300));
+        foodItems.add(new FoodItem("", "https://firebasestorage.googleapis.com/v0/b/calories-5c69d.appspot.com/o/rotitawar-removebg-preview.png?alt=media&token=73a0043d-a384-4187-8724-a9566dfa967c", "Roti Tawar", "Roti tawar putih dibuat dari tepung pilihan", 150));
         foodItems.add(new FoodItem("", "", "Nasi Telur", "dibuat dari potongan-potongan ayam yang digoreng dengan minya zaitun.", 350));
         foodItems.add(new FoodItem("", "", "Mie dok dok", "dibuat dari potongan-potongan ayam yang digoreng dengan minya zaitun.", 210));
         foodItems.add(new FoodItem("", "", "Intel", "dibuat dari potongan-potongan ayam yang digoreng dengan minya zaitun.", 120));
 
         return foodItems;
     }
+
+
 }
 

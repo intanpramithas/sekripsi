@@ -1,4 +1,4 @@
-package calories.com;
+package calories.com.Adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +12,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.card.MaterialCardView;
 
 import java.util.ArrayList;
+
+import calories.com.Model.FoodCategory;
+import calories.com.R;
 
 
 public class FoodCategoryListAdapter extends RecyclerView.Adapter<FoodCategoryListAdapter.ViewHolder> {
