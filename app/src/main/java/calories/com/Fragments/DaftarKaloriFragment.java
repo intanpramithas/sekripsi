@@ -18,6 +18,7 @@ import java.util.ArrayList;
 
 import calories.com.Adapter.FoodCategoryListAdapter;
 import calories.com.Adapter.FoodItemListAdapter;
+import calories.com.DataSource.FoodItemDataSource;
 import calories.com.Model.FoodCategory;
 import calories.com.Model.FoodItem;
 import calories.com.R;
@@ -30,6 +31,8 @@ public class DaftarKaloriFragment extends Fragment {
     private FoodCategoryListAdapter adapterFoodCategoryList;
     private FoodItemListAdapter adapterFoodItemList;
     private boolean isShowingFoodItem;
+    private FoodItemDataSource dataSource;
+    private int categoryId;
 
     public DaftarKaloriFragment(){
 
@@ -81,6 +84,7 @@ public class DaftarKaloriFragment extends Fragment {
                     @Override
                     public void onClick(FoodCategory foodCategory) {
                         isShowingFoodItem = true;
+                        categoryId = foodCategory.getId();
                         setFoodItemRecyclerView();
                         tvHeaderTitle.setText(String.format("Kalori %s", foodCategory.getTitle()));
                     }
@@ -110,14 +114,8 @@ public class DaftarKaloriFragment extends Fragment {
 
     private ArrayList<FoodItem> getFoodItems() {
         ArrayList<FoodItem> foodItems = new ArrayList<>();
-
-        foodItems.add(new FoodItem("", "https://firebasestorage.googleapis.com/v0/b/calories-5c69d.appspot.com/o/nasgor%20(2).png?alt=media&token=3fca6792-cddf-4f21-86a5-2167ea5f262e", "Nasi Goreng", "Nasi goreng dengan potongan sayur.", 200));
-        foodItems.add(new FoodItem("", "https://firebasestorage.googleapis.com/v0/b/calories-5c69d.appspot.com/o/nasi.png?alt=media&token=4967ab76-ef5a-4b0f-b85d-95561c4c69b0", "Nasi Putih", "Dibuat dari beras pilihan.", 300));
-        foodItems.add(new FoodItem("", "https://firebasestorage.googleapis.com/v0/b/calories-5c69d.appspot.com/o/rotitawar-removebg-preview.png?alt=media&token=73a0043d-a384-4187-8724-a9566dfa967c", "Roti Tawar", "Roti tawar putih dibuat dari tepung pilihan", 150));
-        foodItems.add(new FoodItem("", "", "Nasi Telur", "dibuat dari potongan-potongan ayam yang digoreng dengan minya zaitun.", 350));
-        foodItems.add(new FoodItem("", "", "Mie dok dok", "dibuat dari potongan-potongan ayam yang digoreng dengan minya zaitun.", 210));
-        foodItems.add(new FoodItem("", "", "Intel", "dibuat dari potongan-potongan ayam yang digoreng dengan minya zaitun.", 120));
-
+        dataSource = new FoodItemDataSource();
+        foodItems = dataSource.getFoodItems(categoryId);
         return foodItems;
     }
 

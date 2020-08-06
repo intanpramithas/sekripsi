@@ -47,4 +47,5 @@
     <color name="orangered">#FF4500</color>
     <color name="antiquewhite">#FAEBD7</color>
     <color name="lightyellow">#FFFFE0</color>
+    <color name="lightGray">#E4E4E4</color>
 </resources>

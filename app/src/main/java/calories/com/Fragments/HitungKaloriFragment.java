@@ -1,10 +1,11 @@
 package calories.com.Fragments;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.RadioButton;
@@ -53,6 +54,7 @@ public class HitungKaloriFragment extends Fragment {
                 hitungKalori();
             }
         });
+
         return v;
     }
 
@@ -60,7 +62,6 @@ public class HitungKaloriFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         setSpinner();
-
     }
 
     public void initView(View rootView) {
@@ -99,44 +100,46 @@ public class HitungKaloriFragment extends Fragment {
         spinnerActivityLevel.setAdapter(adapter);
     }
 
-    public void hitungKalori(){
-        if (tamp_jeniskelamin == "Laki-laki"){
+    public void hitungKalori() {
+        if (tamp_jeniskelamin == "Laki-laki") {
             BMR = 66.47 + (13.75 * Integer.parseInt(beratbadan.getText().toString()))
                     + (5 * Integer.parseInt((tinggibadan.getText().toString())))
                     - (6.76 * Integer.parseInt(usia.getText().toString()));
-        } else if(tamp_jeniskelamin == "Perempuan"){
+        } else if (tamp_jeniskelamin == "Perempuan") {
             BMR = 655.1 + (9.56 * Integer.parseInt(beratbadan.getText().toString()))
                     + (1.85 * Integer.parseInt((tinggibadan.getText().toString())))
                     - (4.68 * Integer.parseInt(usia.getText().toString()));
         }
+//        public void onItemSelected(AdapterView<?> parent,View view, int pos, long id) {
 
-        spinnerActivityLevel.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
-        {
-            @Override
-            public void onItemSelected(AdapterView<?> parent,View view, int pos, long id) {
+        if (spinnerActivityLevel.getSelectedItem().toString().trim().equals("Sangat Jarang Olahraga")) {
+            hasilkalori = BMR * 1.2;
+        } else if (spinnerActivityLevel.getSelectedItem().toString().trim().equals("Jarang Olahraga (1-3 hari / minggu)")) {
+            hasilkalori = BMR * 1.375;
+        } else if (spinnerActivityLevel.getSelectedItem().toString().trim().equals("Normal Olahraga (3-5 hari / minggu)")) {
+            hasilkalori = BMR * 1.55;
+        } else if (spinnerActivityLevel.getSelectedItem().toString().trim().equals("Sering Olahraga (6-7 hari / minggu)")) {
+            hasilkalori = BMR * 1.725;
+        } else if (spinnerActivityLevel.getSelectedItem().toString().trim().equals("Sangat Sering Olahraga (tiap hari bisa 2 kali dalam sehari)")) {
+            hasilkalori = BMR * 1.9;
+        } else {
+            hasilkalori = BMR;
+        }
+//        }
+        Toast.makeText(getActivity(), hasilkalori + "", Toast.LENGTH_SHORT).show();
 
-                if ( spinnerActivityLevel.getSelectedItem().toString().trim().equals("Sangat Jarang Olahraga")) {
-                    hasilkalori = BMR * 1.2;
-                }
-                else if( spinnerActivityLevel.getSelectedItem().toString().trim().equals("Jarang Olahraga (1-3 hari / minggu)")) {
-                    hasilkalori = BMR * 1.375;
-                }
-                else if( spinnerActivityLevel.getSelectedItem().toString().trim().equals("Normal Olahraga (3-5 hari / minggu)")) {
-                    hasilkalori = BMR * 1.55;
-                }
-                else if( spinnerActivityLevel.getSelectedItem().toString().trim().equals("Sering Olahraga (6-7 hari / minggu)")) {
-                    hasilkalori = BMR * 1.725;
-                }
-                else if( spinnerActivityLevel.getSelectedItem().toString().trim().equals("Sangat Sering Olahraga (tiap hari bisa 2 kali dalam sehari)")) {
-                    hasilkalori = BMR * 1.9;
-                }
-                else {
-                    hasilkalori = BMR;
-                }
-            }
-            public void onNothingSelected(AdapterView<?> parent) {}
-        });
-        Toast.makeText(getActivity(),  hasilkalori + "", Toast.LENGTH_SHORT).show();
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("MyPreferences", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        editor.putInt("berat badan", Integer.parseInt(beratbadan.getText().toString()));
+        editor.putInt("tinggi badan", Integer.parseInt(tinggibadan.getText().toString()));
+        editor.putInt("usia", Integer.parseInt(usia.getText().toString()));
+        editor.putString("jenis kelamin", tamp_jeniskelamin);
+        editor.putString("level aktivitas", spinnerActivityLevel.getSelectedItem().toString().trim());
+        editor.putFloat("hasil kalori", (float) hasilkalori);
+
+        editor.apply();
+    }
 
 //        String tamp_hasil_kalori;
 //        tamp_hasil_kalori = hasilkalori + "";
@@ -144,5 +147,5 @@ public class HitungKaloriFragment extends Fragment {
 //        bundle.putDouble("hasilkalori", hasilkalori);
 //        HomeFragment homeFragment = new HomeFragment();
 //        homeFragment.setArguments(bundle);
-    }
+
 }

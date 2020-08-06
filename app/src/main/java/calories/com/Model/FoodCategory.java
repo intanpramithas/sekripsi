@@ -5,11 +5,13 @@ public class FoodCategory {
     private int id;
     private int imageId;
     private String title;
+    private String kategori;
 
     public FoodCategory(int id, int imageId, String title) {
         this.id = id;
         this.imageId = imageId;
         this.title = title;
+
     }
 
     public int getImageId() {

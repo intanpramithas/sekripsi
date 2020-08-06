@@ -1,5 +1,7 @@
 package calories.com.Fragments;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,12 +35,16 @@ public class HomeFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
     }
 
+
+
     public void initView(View rootView){
         tv_batas_kalori_tubuh = rootView.findViewById(R.id.tv_batas_kalori_tubuh);
-//        strtext = getArguments().getDouble("hasilkalori");
-//        if(strtext != null){
-//            tv_batas_kalori_tubuh.setText(strtext.toString());
-//        }
 
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("MyPreferences", Context.MODE_PRIVATE);
+        strtext = (double) sharedPreferences.getFloat("hasil kalori",0);
+        if(strtext != null){
+            tv_batas_kalori_tubuh.setText(String.format("%.2f", strtext));
+        }
     }
+
 }

@@ -6,13 +6,15 @@ public class FoodItem {
     private String name;
     private String description;
     private int calory;
+    private int beratmakanan;
 
-    public FoodItem(String id, String imageUrl, String name, String description, int calory) {
+    public FoodItem(String id, String imageUrl, String name, String description, int calory, int beratmakanan) {
         this.id = id;
         this.imageUrl = imageUrl;
         this.name = name;
         this.description = description;
         this.calory = calory;
+        this.beratmakanan = beratmakanan;
     }
 
     public String getImageUrl() {
@@ -29,5 +31,9 @@ public class FoodItem {
 
     public String getDescription() {
         return description;
+    }
+
+    public int getBeratmakanan(){
+        return  beratmakanan;
     }
 }
