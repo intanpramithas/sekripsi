@@ -1,6 +1,7 @@
 package calories.com.Adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.button.MaterialButton;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 
@@ -24,15 +26,17 @@ public class FoodDetailListAdapter extends RecyclerView.Adapter<FoodDetailListAd
     private Context context;
     private FoodDetailListAdapter.onItemClickListener listener;
 
-    public FoodDetailListAdapter(ArrayList foodItems, Context context){
+    public FoodDetailListAdapter(ArrayList<FoodItem> foodItems, Context context, FoodDetailListAdapter.onItemClickListener listener){
         this.foodItems = foodItems;
         this.context = context;
+        this.listener = listener;
+        Log.d("ARRAYLIST", new Gson().toJson(foodItems));
     }
 
     @NonNull
     @Override
     public FoodDetailListAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType){
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_food_item_list, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_detail_konsumsikalori, parent, false);
         return new ViewHolder(v);
     }
 
@@ -56,6 +60,7 @@ public class FoodDetailListAdapter extends RecyclerView.Adapter<FoodDetailListAd
         private TextView tvFoodDescription;
         private TextView tvFoodCalory;
         private MaterialButton mbtnFoodDetail;
+        private ImageView ivHapusFood;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -64,6 +69,7 @@ public class FoodDetailListAdapter extends RecyclerView.Adapter<FoodDetailListAd
             tvFoodDescription = itemView.findViewById(R.id.tv_food_description);
             tvFoodName = itemView.findViewById(R.id.tv_food_name);
             mbtnFoodDetail = itemView.findViewById(R.id.mbtn_tambah_makanan);
+            ivHapusFood = itemView.findViewById(R.id.iv_hapus_food);
         }
 
         public void bind(final FoodItem foodItem){
@@ -76,7 +82,7 @@ public class FoodDetailListAdapter extends RecyclerView.Adapter<FoodDetailListAd
                     .placeholder(R.drawable.food_placeholder)
                     .into(ivFoodImage);
 
-            mbtnFoodDetail.setOnClickListener(new View.OnClickListener(){
+            ivHapusFood.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View v) {
                     listener.onClick(foodItem);

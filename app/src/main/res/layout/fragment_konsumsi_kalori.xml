@@ -392,6 +392,8 @@
     </LinearLayout>
 
     <include
-        layout="@layout/bottomsheet_konsumsi_kalori"/>
+        layout="@layout/bottomsheet_konsumsi_kalori" />
+    <include
+        layout="@layout/bottomsheet_detail_konsumsikalori"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

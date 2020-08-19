@@ -1,6 +1,8 @@
 package calories.com.Fragments;
 
 import android.app.Dialog;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -14,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
@@ -25,6 +28,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.button.MaterialButton;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
 
@@ -53,6 +58,7 @@ public class KonsumsiKaloriFragment extends Fragment implements View.OnClickList
     private ImageView ivAddLunch;
     private ImageView ivAddDinner;
     private ImageView ivAddSnack;
+//    private ImageView ivHapusFood;
     private MaterialButton mbtn_detail_breakfast;
     private MaterialButton mbtn_detail_lunch;
     private MaterialButton mbtn_detail_dinner;
@@ -60,6 +66,8 @@ public class KonsumsiKaloriFragment extends Fragment implements View.OnClickList
     private MaterialButton mtbn_tambah_makanan;
     private RecyclerView rvFoodListSearch;
     private RecyclerView rvFoodDetail;
+    private double jumlahkalorimakanan;
+    private ArrayList<FoodItem> objFood;
 
     public KonsumsiKaloriFragment() {
         // Required empty public constructor
@@ -79,11 +87,14 @@ public class KonsumsiKaloriFragment extends Fragment implements View.OnClickList
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        setFoodItemSearchRecyclerView();
+//        setFoodItemSearchRecyclerView();
+//        setFoodDetailRecyclerView();
+
     }
 
 
     public void initView(View rootView){
+
         tv_batas_kalori_tubuh = rootView.findViewById(R.id.tv_batas_kalori_tubuh);
         llFoodSearchContainer = rootView.findViewById(R.id.ll_bottomsheet_container);
         llFoodDetailContainer = rootView.findViewById(R.id.ll_bottomsheet_container_detail);
@@ -91,6 +102,7 @@ public class KonsumsiKaloriFragment extends Fragment implements View.OnClickList
         ivAddLunch = rootView.findViewById(R.id.iv_add_lunch);
         ivAddDinner = rootView.findViewById(R.id.iv_add_dinner);
         ivAddSnack = rootView.findViewById(R.id.iv_add_snack);
+//        ivHapusFood = rootView.findViewById(R.id.iv_hapus_food);
         mbtn_detail_breakfast = rootView.findViewById(R.id.mbtn_detail_breakfast);
         mbtn_detail_lunch = rootView.findViewById(R.id.mbtn_detail_lunch);
         mbtn_detail_dinner = rootView.findViewById(R.id.mbtn_detail_dinner);
@@ -99,12 +111,13 @@ public class KonsumsiKaloriFragment extends Fragment implements View.OnClickList
         rvFoodDetail = rootView.findViewById(R.id.rv_food_detail);
 
         bsbFoodSearch = BottomSheetBehavior.from(llFoodSearchContainer);
-//        bsbFoodDetail = BottomSheetBehavior.from(llFoodDetailContainer);
+        bsbFoodDetail = BottomSheetBehavior.from(llFoodDetailContainer);
 
         ivAddBreakfast.setOnClickListener(this);
         ivAddLunch.setOnClickListener(this);
         ivAddDinner.setOnClickListener(this);
         ivAddSnack.setOnClickListener(this);
+//        ivHapusFood.setOnClickListener(this);
 
         mbtn_detail_breakfast.setOnClickListener(this);
         mbtn_detail_lunch.setOnClickListener(this);
@@ -113,9 +126,9 @@ public class KonsumsiKaloriFragment extends Fragment implements View.OnClickList
 
         }
 
-
     @Override
     public void onClick(View v) {
+        setFoodItemSearchRecyclerView();
         switch (v.getId()) {
             case R.id.iv_add_breakfast:
                 bsbFoodSearch.setState(BottomSheetBehavior.STATE_EXPANDED);
@@ -142,6 +155,7 @@ public class KonsumsiKaloriFragment extends Fragment implements View.OnClickList
                 bsbFoodDetail.setState(BottomSheetBehavior.STATE_EXPANDED);
                 break;
         }
+        setFoodDetailRecyclerView();
     }
 
     private void setOnBackPressedCallback() {
@@ -150,6 +164,9 @@ public class KonsumsiKaloriFragment extends Fragment implements View.OnClickList
             public void handleOnBackPressed() {
                 if (bsbFoodSearch.getState() == BottomSheetBehavior.STATE_EXPANDED) {
                     bsbFoodSearch.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                }
+                else if(bsbFoodDetail.getState() == BottomSheetBehavior.STATE_EXPANDED){
+                    bsbFoodDetail.setState(BottomSheetBehavior.STATE_COLLAPSED);
                 } else {
                     getActivity().finishAffinity();
                 }
@@ -163,19 +180,19 @@ public class KonsumsiKaloriFragment extends Fragment implements View.OnClickList
                 new FoodItemSearchAdapter.onItemClickListener() {
                     @Override
                     public void onClick(final FoodItem foodItem) {
-                        Spinner dialogSpinner;
+                        final Spinner dialogSpinner;
                         TextView dialogTvFoodName;
-                        TextView dialogTvFoodCalory;
+                        final TextView dialogTvFoodCalory;
                         ImageView dialogIvFoodImage;
                         MaterialButton dialogMbtnTambahMakanan;
-                        int beratmakanan = foodItem.getBeratmakanan();
+                        final double beratmakanan = foodItem.getBeratmakanan();
 
-                        String[] listActivityLevel = {
+                        String[] listFood = {
                                 "1 porsi (" + beratmakanan + " gr)",
                                 "1/2 porsi (" + beratmakanan * 0.5 + " gr)",
                                 "3/4 porsi (" + beratmakanan * 0.75 + " gr)"
                         };
-                        ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, listActivityLevel);
+                        ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, listFood);
 
                         Dialog dialog = new Dialog(getActivity());
 
@@ -201,33 +218,76 @@ public class KonsumsiKaloriFragment extends Fragment implements View.OnClickList
                         window.setLayout(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.WRAP_CONTENT);
 
 
-//                        dialogMbtnTambahMakanan.setOnClickListener(new View.OnClickListener() {
-//                            @Override
-//                            public void onClick(View view) {
-//                                TampMakanan.add(foodItem);
-////
-//////                        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("ListMakanan", Context.MODE_PRIVATE);
-//////                        SharedPreferences.Editor editor = sharedPreferences.edit();
-//                            }
-//                        });
+                        dialogMbtnTambahMakanan.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                TampMakanan.add(foodItem);
 
+                                if (dialogSpinner.getSelectedItem().toString().trim().equals("1 porsi ("+ beratmakanan +" gr)")){
+                                    jumlahkalorimakanan = beratmakanan / foodItem.getBeratmakanan() * foodItem.getCalory();
+                                    Toast.makeText(getActivity(), jumlahkalorimakanan + "", Toast.LENGTH_SHORT).show();
+                                } else if(dialogSpinner.getSelectedItem().toString().trim().equals("1/2 porsi ("+ beratmakanan * 0.5 +" gr)")){
+                                    jumlahkalorimakanan = (beratmakanan * 0.5) / foodItem.getBeratmakanan() * foodItem.getCalory();
+                                    Toast.makeText(getActivity(), jumlahkalorimakanan + "", Toast.LENGTH_SHORT).show();
+                                } else if (dialogSpinner.getSelectedItem().toString().trim().equals("3/4 porsi ("+ beratmakanan * 0.75 +" gr)")){
+                                    jumlahkalorimakanan = (beratmakanan * 0.75) / foodItem.getBeratmakanan() * foodItem.getCalory();
+                                    Toast.makeText(getActivity(), jumlahkalorimakanan + "", Toast.LENGTH_SHORT).show();
+                                }
+
+                                SharedPreferences foodPreferences = getActivity().getSharedPreferences("FoodPreferences", Context.MODE_PRIVATE);
+                                SharedPreferences.Editor editor = foodPreferences.edit();
+
+                                Gson gson = new Gson();
+                                objFood = gson.fromJson(foodPreferences.getString("Foods", "[]"), new TypeToken<ArrayList<FoodItem>>(){}.getType());
+                                objFood.add(foodItem);
+                                String json = gson.toJson(objFood);
+                                editor.putString("Foods", json);
+                                editor.commit();
+                            }
+                        });
 
                     }
                 });
-                    rvFoodListSearch.setAdapter(foodItemSearchAdapter);
-                    rvFoodListSearch.setLayoutManager(new LinearLayoutManager(getActivity()));
+            rvFoodListSearch.setAdapter(foodItemSearchAdapter);
+            rvFoodListSearch.setLayoutManager(new LinearLayoutManager(getActivity()));
     }
 
-
-        private ArrayList<FoodItem> getFoodItemsSearch () {
+    private ArrayList<FoodItem> getFoodItemsSearch () {
             ArrayList<FoodItem> foodItems = new ArrayList<>();
 
             foodItems.add(new FoodItem("", "https://firebasestorage.googleapis.com/v0/b/tantanprojek.appspot.com/o/images%2Fapel_1-removebg-preview%202.png?alt=media&token=b6e5ec33-c9e9-452f-8376-db5cf59fe2d1", "Apel Merah", "Apel Merah Segar", 200, 100));
             foodItems.add(new FoodItem("", "https://firebasestorage.googleapis.com/v0/b/tantanprojek.appspot.com/o/images%2Fapel2_1-removebg-preview%202.png?alt=media&token=6a0fd9a8-f3eb-4c9d-98a0-3104e69f9e5b", "Apel Hijau", "Apel Hijau Segar", 300, 100));
 
             return foodItems;
+    }
+
+    private void setFoodDetailRecyclerView(){
+        foodDetailListAdapter = new FoodDetailListAdapter(getFoodItemsDetail(), getActivity(),
+                new FoodDetailListAdapter.onItemClickListener(){
+
+            @Override
+            public void onClick(final FoodItem foodItem){
+                TampMakanan.remove(foodItem);
+
+            }
+        });
+
+        if (objFood!=null){
+            rvFoodDetail.setAdapter(foodDetailListAdapter);
+            rvFoodDetail.setLayoutManager(new LinearLayoutManager(getActivity()));
         }
 
+    }
+
+    private ArrayList<FoodItem> getFoodItemsDetail () {
+
+        SharedPreferences foodPreferences = getActivity().getSharedPreferences("FoodPreferences", Context.MODE_PRIVATE);
+
+        Gson gson = new Gson();
+        String json = foodPreferences.getString("Foods","");
+        objFood = gson.fromJson(json, new TypeToken<ArrayList<FoodItem>>(){}.getType());
+        return objFood;
+    }
 
 }
 
