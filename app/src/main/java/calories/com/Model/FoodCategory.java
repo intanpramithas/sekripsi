@@ -11,6 +11,7 @@ public class FoodCategory {
         this.id = id;
         this.imageId = imageId;
         this.title = title;
+        this.kategori = kategori;
 
     }
 
@@ -24,5 +25,9 @@ public class FoodCategory {
 
     public int getId() {
         return id;
+    }
+
+    public String getKategori(){
+        return kategori;
     }
 }
