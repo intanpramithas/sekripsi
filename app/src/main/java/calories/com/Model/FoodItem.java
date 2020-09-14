@@ -17,6 +17,10 @@ public class FoodItem {
         this.beratmakanan = beratmakanan;
     }
 
+    public String getId() {
+        return id;
+    }
+
     public String getImageUrl() {
         return imageUrl;
     }
