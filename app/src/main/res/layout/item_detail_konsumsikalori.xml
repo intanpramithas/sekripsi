@@ -51,12 +51,13 @@
 
         </LinearLayout>
 
+
         <TextView
             android:id="@+id/tv_food_calory"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="200 Kalori"
-            android:textStyle="bold"/>
+            android:text="0"
+            android:textStyle="bold" />
 
     </LinearLayout>
 
@@ -66,5 +67,6 @@
         android:layout_height="60dp"
         android:layout_gravity="center"
         android:src="@drawable/hapus"/>
+
 
 </LinearLayout>

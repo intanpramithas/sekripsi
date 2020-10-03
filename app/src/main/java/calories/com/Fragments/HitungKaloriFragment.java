@@ -2,7 +2,10 @@ package calories.com.Fragments;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +14,7 @@ import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -18,6 +22,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 
 import calories.com.R;
 
@@ -31,11 +36,15 @@ public class HitungKaloriFragment extends Fragment {
     private TextInputEditText tinggibadan;
     private TextInputEditText usia;
     private RadioGroup rg_jeniskelamin;
-    private RadioButton rb_jeniskelamin;
+    private RadioButton rb_male;
+    private RadioButton rb_female;
     private String tamp_jeniskelamin;
     private Button btn_hitung;
     private double BMR;
     private double hasilkalori;
+    private TextInputLayout cont_beratbadan, cont_tinggibadan, cont_usia;
+    private TextView tv_eror_jeniskelamin;
+    private TextView tv_eror_levelaktivitas;
 
     public HitungKaloriFragment() {
         // Required empty public constructor
@@ -51,7 +60,9 @@ public class HitungKaloriFragment extends Fragment {
         btn_hitung.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view){
-                hitungKalori();
+                if (isValidForm() == true) {
+                    hitungKalori();
+                }
             }
         });
 
@@ -65,14 +76,21 @@ public class HitungKaloriFragment extends Fragment {
     }
 
     public void initView(View rootView) {
+        cont_beratbadan = rootView.findViewById(R.id.til_body_weight);
+        cont_tinggibadan = rootView.findViewById(R.id.til_body_height);
+        cont_usia = rootView.findViewById(R.id.til_age);
         spinnerActivityLevel = rootView.findViewById(R.id.spinner_activity_level);
         beratbadan = rootView.findViewById(R.id.tiet_body_weight);
         tinggibadan = rootView.findViewById(R.id.tiet_body_height);
         usia = rootView.findViewById(R.id.tiet_age);
         btn_hitung = rootView.findViewById(R.id.button_hitung);
+        rb_male = rootView.findViewById(R.id.rb_male);
+        rb_female = rootView.findViewById(R.id.rb_female);
+        tv_eror_jeniskelamin = rootView.findViewById(R.id.tv_eror_jeniskelamin);
+        tv_eror_levelaktivitas = rootView.findViewById(R.id.tv_eror_levelaktivitas);
         rg_jeniskelamin = rootView.findViewById(R.id.rg_sex);
-        rg_jeniskelamin.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener(){
 
+        rg_jeniskelamin.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener(){
             public void onCheckedChanged(RadioGroup group, int checkedId) {
 
                 switch(checkedId) {
@@ -85,6 +103,59 @@ public class HitungKaloriFragment extends Fragment {
                 }
             }
         });
+
+        //change listener
+        beratbadan.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                cont_beratbadan.setError(null);
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
+        tinggibadan.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                cont_tinggibadan.setError(null);
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
+        usia.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                cont_usia.setError(null);
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
     }
 
     public void setSpinner() {
@@ -100,7 +171,58 @@ public class HitungKaloriFragment extends Fragment {
         spinnerActivityLevel.setAdapter(adapter);
     }
 
+    public boolean isValidForm(){
+        boolean isValid = true;
+        boolean isValidBeratbadan = true;
+        boolean isValidTinggibadan = true;
+        boolean isValidJeniskelamin = true;
+        boolean isValidUsia = true;
+        boolean isValidLevelaktivitas = true;
+
+        if (beratbadan.getText().toString().isEmpty()) {
+            cont_beratbadan.setError("Berat badan tidak boleh kosong!");
+            isValidBeratbadan = false;
+        }
+        if (tinggibadan.getText().toString().isEmpty()) {
+            cont_tinggibadan.setError("Tinggi badan tidak boleh kosong!");
+            isValidTinggibadan = false;
+        }
+        if (!rb_male.isChecked() || !rb_female.isChecked()) {
+            tv_eror_jeniskelamin.setTextColor(Color.RED);
+            tv_eror_jeniskelamin.setText("Jenis kelamin tidak boleh kosong!");
+            isValidJeniskelamin = false;
+        }
+        if (rb_male.isChecked() || rb_female.isChecked()){
+            tv_eror_jeniskelamin.setText("");
+            isValidJeniskelamin = true;
+        }
+        if (usia.getText().toString().isEmpty()){
+            cont_usia.setError("Usia tidak boleh kosong!");
+            isValidUsia = false;
+        }
+        if (spinnerActivityLevel.getSelectedItem().toString().equals("Pilih Level Aktivitas")){
+            tv_eror_levelaktivitas.setTextColor(Color.RED);
+            tv_eror_levelaktivitas.setText("Anda harus memilih level aktivitas!");
+            isValidLevelaktivitas = false;
+        }
+        if (!spinnerActivityLevel.getSelectedItem().toString().equals("Pilih Level Aktivitas")){
+            tv_eror_levelaktivitas.setText("");
+            isValidLevelaktivitas = true;
+        }
+        if (isValidBeratbadan == true && isValidTinggibadan == true && isValidJeniskelamin == true
+                && isValidUsia == true && isValidLevelaktivitas == true){
+
+            isValid = true;
+        }else {
+
+            isValid = false;
+        }
+        return isValid;
+    }
+
+
     public void hitungKalori() {
+        if (!isValidForm()) return;
         if (tamp_jeniskelamin == "Laki-laki") {
             BMR = 66.47 + (13.75 * Integer.parseInt(beratbadan.getText().toString()))
                     + (5 * Integer.parseInt((tinggibadan.getText().toString())))
@@ -110,7 +232,6 @@ public class HitungKaloriFragment extends Fragment {
                     + (1.85 * Integer.parseInt((tinggibadan.getText().toString())))
                     - (4.68 * Integer.parseInt(usia.getText().toString()));
         }
-//        public void onItemSelected(AdapterView<?> parent,View view, int pos, long id) {
 
         if (spinnerActivityLevel.getSelectedItem().toString().trim().equals("Sangat Jarang Olahraga")) {
             hasilkalori = BMR * 1.2;
@@ -125,7 +246,7 @@ public class HitungKaloriFragment extends Fragment {
         } else {
             hasilkalori = BMR;
         }
-//        }
+
         Toast.makeText(getActivity(), hasilkalori + "", Toast.LENGTH_SHORT).show();
 
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("MyPreferences", Context.MODE_PRIVATE);
@@ -136,10 +257,11 @@ public class HitungKaloriFragment extends Fragment {
         editor.putInt("usia", Integer.parseInt(usia.getText().toString()));
         editor.putString("jenis kelamin", tamp_jeniskelamin);
         editor.putString("level aktivitas", spinnerActivityLevel.getSelectedItem().toString().trim());
-        editor.putFloat("hasil kalori", (float) hasilkalori);
+        editor.putFloat("Hasil Kalori", (float) hasilkalori);
 
         editor.apply();
     }
+
 
 //        String tamp_hasil_kalori;
 //        tamp_hasil_kalori = hasilkalori + "";

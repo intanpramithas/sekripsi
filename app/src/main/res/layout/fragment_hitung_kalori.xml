@@ -62,7 +62,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/wil_body_height"
+                android:id="@+id/til_body_height"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -86,7 +86,7 @@
                 android:layout_marginTop="16dp"
                 android:text="Jenis Kelamin"
                 android:textSize="16sp"/>
-            
+
             <RadioGroup
                 android:id="@+id/rg_sex"
                 android:layout_width="match_parent"
@@ -110,6 +110,11 @@
                     android:text="Perempuan"/>
 
             </RadioGroup>
+
+            <TextView
+                android:id="@+id/tv_eror_jeniskelamin"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_age"
@@ -140,6 +145,10 @@
                 android:id="@+id/spinner_activity_level"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/tv_eror_levelaktivitas"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/button_hitung"
@@ -150,11 +159,6 @@
                 android:backgroundTint="@color/colorPrimary"
                 android:text="Hitung"
                 android:textColor="@color/white"/>
-
-
-
-
-
 
 
         </LinearLayout>
