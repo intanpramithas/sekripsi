@@ -9,7 +9,7 @@
     <string name="tv_login">Login</string>
     <string name="title_home">Home</string>
     <string name="title_hitung">Hitung Kalori</string>
-    <string name="title_konsumsikalori">Konsumsi Kalori</string>
+    <string name="title_konsumsikalori">Kalori Makan</string>
     <string name="title_daftarkalori">Daftar Kalori</string>
 
     <string-array name="tee">

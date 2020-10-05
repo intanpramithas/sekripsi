@@ -262,12 +262,4 @@ public class HitungKaloriFragment extends Fragment {
         editor.apply();
     }
 
-
-//        String tamp_hasil_kalori;
-//        tamp_hasil_kalori = hasilkalori + "";
-//        Bundle bundle = new Bundle();
-//        bundle.putDouble("hasilkalori", hasilkalori);
-//        HomeFragment homeFragment = new HomeFragment();
-//        homeFragment.setArguments(bundle);
-
 }

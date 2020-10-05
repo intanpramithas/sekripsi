@@ -43,7 +43,5 @@ public class FoodItem {
         calory = newCalory;
         return 1;
     }
-//    public int setPorsi(int porsiSatu){
-//        calory = 1 * calory;
-//    }
+
 }

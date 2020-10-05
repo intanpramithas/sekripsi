@@ -10,6 +10,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".Fragments.DaftarKaloriFragment"></activity>
+        <activity android:name=".Fragments.KonsumsiKaloriFragment"></activity>
+        <activity android:name=".Fragments.HitungKaloriFragment"></activity>
         <activity android:name=".RegisterActivity"></activity>
         <activity android:name=".LoginActivity">
             <intent-filter>
