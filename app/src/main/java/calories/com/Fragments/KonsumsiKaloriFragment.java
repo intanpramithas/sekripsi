@@ -344,7 +344,7 @@ public class KonsumsiKaloriFragment extends Fragment implements View.OnClickList
                         };
                         ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, listFood);
 
-                        Dialog dialog = new Dialog(getActivity());
+                        final Dialog dialog = new Dialog(getActivity());
 
                         dialog.setContentView(R.layout.dialog_add_consume_calory);
                         dialogSpinner = dialog.findViewById(R.id.spinner_food_quantity);
@@ -364,9 +364,9 @@ public class KonsumsiKaloriFragment extends Fragment implements View.OnClickList
                         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                         dialog.show();
 
+
                         Window window = dialog.getWindow();
                         window.setLayout(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.WRAP_CONTENT);
-
 
                         dialogMbtnTambahMakanan.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -375,16 +375,16 @@ public class KonsumsiKaloriFragment extends Fragment implements View.OnClickList
 
                                 if (dialogSpinner.getSelectedItem().toString().trim().equals("1 porsi (" + beratmakanan + " gr)")) {
                                     jumlahkalorimakanan = (beratmakanan / foodItem.getBeratmakanan() * foodItem.getCalory());
-                                    Toast.makeText(getActivity(), jumlahkalorimakanan + "", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getActivity(), foodItem.getName() + " Telah Berhasil Ditambahkan", Toast.LENGTH_SHORT).show();
                                 } else if (dialogSpinner.getSelectedItem().toString().trim().equals("1/2 porsi (" + beratmakanan * 0.5 + " gr)")) {
                                     jumlahkalorimakanan = (beratmakanan * 0.5) / foodItem.getBeratmakanan() * foodItem.getCalory();
-                                    Toast.makeText(getActivity(), jumlahkalorimakanan + "", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getActivity(), foodItem.getName() + " Telah Berhasil Ditambahkan", Toast.LENGTH_SHORT).show();
                                 } else if (dialogSpinner.getSelectedItem().toString().trim().equals("3/4 porsi (" + beratmakanan * 0.75 + " gr)")) {
                                     jumlahkalorimakanan = (beratmakanan * 0.75) / foodItem.getBeratmakanan() * foodItem.getCalory();
-                                    Toast.makeText(getActivity(), jumlahkalorimakanan + "", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getActivity(), foodItem.getName() + " Telah Berhasil Ditambahkan", Toast.LENGTH_SHORT).show();
                                 }
 
-                                //SP menyimpan kalorimakanan untuk porsi
+                                //SP menyimpan kalorimakanan untuk porsi (nyimpen jumlahakalorimakan yg udh diproses)
                                 SharedPreferences porsiMakanPreferences = getActivity().getSharedPreferences("PrefKaloriMakan", Context.MODE_PRIVATE);
                                 TampPorsiMakanan = porsiMakanPreferences.getFloat("Porsi Makan", 0);
                                 TampPorsiMakanan = (float) jumlahkalorimakanan;
@@ -466,10 +466,9 @@ public class KonsumsiKaloriFragment extends Fragment implements View.OnClickList
                                         editor.commit();
                                         break;
                                 }
+                                dialog.dismiss();
                             }
                         });
-
-
                     }
                 });
         rvFoodListSearch.setAdapter(foodItemSearchAdapter);
@@ -499,7 +498,7 @@ public class KonsumsiKaloriFragment extends Fragment implements View.OnClickList
                                 if (foodItem.getId().equals(item.getId())) {
                                     foodItems.remove(item);
 
-                                    //SP buat ngambil kalori berdasar porsi
+                                    //SP buat ngambil kalori berdasar porsi (ngambil nilai jumlahkalorimakan)
                                     SharedPreferences porsiMakanPreferences = getActivity().getSharedPreferences("PrefKaloriMakan", Context.MODE_PRIVATE);
                                     TampPorsiMakanan = porsiMakanPreferences.getFloat("Porsi Makan", 0);
                                     Toast.makeText(getActivity(), TampPorsiMakanan + "", Toast.LENGTH_LONG).show();
@@ -512,7 +511,6 @@ public class KonsumsiKaloriFragment extends Fragment implements View.OnClickList
                                     TampKaloriMakanBaru = totalKaloriPreferences.getFloat("Total Kalori",0);
                                     Toast.makeText(getActivity(), foodItem.getCalory() + "", Toast.LENGTH_LONG).show();
                                     TampKaloriMakanBaru -= TampPorsiMakanan;
-
                                     SharedPreferences.Editor editor2 = totalKaloriPreferences.edit();
                                     editor2.putFloat("Total Kalori", TampKaloriMakanBaru);
                                     editor2.apply();
@@ -523,12 +521,10 @@ public class KonsumsiKaloriFragment extends Fragment implements View.OnClickList
                                     if(strtextkalorimakanan != null){
                                         tv_batas_kalori_makan.setText(String.format("%.2f", strtextkalorimakanan));
                                     }
-
                                     break;
                                 }
                             }
-
-
+                            
                         Gson gson = new Gson();
                         SharedPreferences.Editor editor = null;
 

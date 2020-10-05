@@ -28,7 +28,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:gravity="center_vertical"
                 android:orientation="horizontal">
 
                 <de.hdodenhof.circleimageview.CircleImageView
@@ -45,18 +44,26 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Intan Pramitha"
+                        android:text="Selamat Datang!"
                         android:textColor="@color/white"
-                        android:textSize="16sp"
+                        android:textSize="18sp"
                         android:textStyle="bold" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:text="Intanpramitha@gmail.com"
+                        android:text="Intan Pramitha"
                         android:textColor="@color/white"
-                        android:textSize="14sp" />
+                        android:textSize="15sp"/>
+<!--                        android:textStyle="bold" />-->
+
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginTop="4dp"-->
+<!--                        android:text="Intanpramitha@gmail.com"-->
+<!--                        android:textColor="@color/white"-->
+<!--                        android:textSize="14sp" />-->
 
                     <TextView
                         android:id="@+id/tv_date"
@@ -133,7 +140,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="4dp"
                         android:layout_gravity="bottom"
-                        android:text="KKal"
+                        android:text="Kal"
                         android:textSize="12sp"/>
 
                 </LinearLayout>
@@ -173,7 +180,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="4dp"
-                        android:text="KKal"
+                        android:text="Kal"
                         android:textSize="12sp"/>
 
                 </LinearLayout>
