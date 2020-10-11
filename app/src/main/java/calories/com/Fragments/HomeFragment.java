@@ -86,7 +86,7 @@ public class HomeFragment extends Fragment {
                     .create();
             alertDialog.setCancelable(false);
             alertDialog.setTitle("OVER KALORI!");
-            alertDialog.setMessage("Hati-Hati, Kalori yang Anda Konsumsi Telah Melebihi Kebutuhan Kalori Anda!");
+            alertDialog.setMessage("Harap berhati-hati, jumlah kalori yang Anda konsumsi telah melebihi jumlah kebutuhan kalori tubuh Anda.");
             alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
 
                 public void onClick(DialogInterface dialog, int which) {

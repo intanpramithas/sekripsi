@@ -59,9 +59,11 @@ public class FoodDetailListAdapter extends RecyclerView.Adapter<FoodDetailListAd
         private TextView tvFoodName;
         private TextView tvFoodDescription;
         private TextView tvFoodCalory;
+        private TextView tvFoodTimeEat;
         private MaterialButton mbtnFoodDetail;
         private ImageView ivHapusFood;
-        private double jumlahkalorimakanan;
+
+
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -69,6 +71,7 @@ public class FoodDetailListAdapter extends RecyclerView.Adapter<FoodDetailListAd
             tvFoodCalory = itemView.findViewById(R.id.tv_food_calory);
             tvFoodDescription = itemView.findViewById(R.id.tv_food_description);
             tvFoodName = itemView.findViewById(R.id.tv_food_name);
+            tvFoodTimeEat = itemView.findViewById(R.id.tv_time_eat);
             mbtnFoodDetail = itemView.findViewById(R.id.mbtn_tambah_makanan);
             ivHapusFood = itemView.findViewById(R.id.iv_hapus_food);
         }
@@ -77,6 +80,7 @@ public class FoodDetailListAdapter extends RecyclerView.Adapter<FoodDetailListAd
             tvFoodName.setText(foodItem.getName());
             tvFoodDescription.setText(foodItem.getDescription());
             tvFoodCalory.setText(String.format("%.0f Kalori", foodItem.getCalory()));
+            tvFoodTimeEat.setText("Jam Makan : " + foodItem.getTime());
 
             Glide.with(context)
                     .load(foodItem.getImageUrl())

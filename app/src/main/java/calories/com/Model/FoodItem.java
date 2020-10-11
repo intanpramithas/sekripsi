@@ -7,6 +7,8 @@ public class FoodItem {
     private String description;
     private double calory;
     private int beratmakanan;
+    private String time;
+
 
     public FoodItem(String id, String imageUrl, String name, String description, int calory, int beratmakanan) {
         this.id = id;
@@ -39,9 +41,15 @@ public class FoodItem {
     public int getBeratmakanan(){
         return  beratmakanan;
     }
+    public String getTime(){
+        return time;
+    }
     public double setCalory(double newCalory){
         calory = newCalory;
         return 1;
+    }
+    public void setTime(String time){
+        this.time = time;
     }
 
 }

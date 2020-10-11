@@ -36,18 +36,18 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Intan Pramitha"
+                    android:text="Selamat Datang!"
                     android:textColor="@color/white"
-                    android:textStyle="bold"
-                    android:textSize="16sp"/>
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:text="Intanpramitha@gmail.com"
-                    android:textColor="@color/ghostwhite"
-                    android:textSize="14sp"/>
+                    android:text="Intan Pramitha"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"/>
+
 
                 <TextView
                     android:id="@+id/tv_date"
@@ -125,7 +125,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="4dp"
                     android:layout_gravity="bottom"
-                    android:text="Kal"
+                    android:text="Kkal"
                     android:textSize="12sp"/>
 
             </LinearLayout>
@@ -165,7 +165,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="4dp"
-                    android:text="Kal"
+                    android:text="Kkal"
                     android:textSize="12sp"/>
 
 <!--                <com.google.android.material.button.MaterialButton-->
@@ -203,13 +203,7 @@
                 android:text="Informasi Mengenai Diabetes Mellitus"
                 android:textSize="16sp"
                 android:textStyle="bold"/>
-            
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16sp"
-                android:adjustViewBounds="true"
-                android:src="@drawable/konten1"/>
+
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -224,6 +218,13 @@
                 android:layout_marginHorizontal="16sp"
                 android:adjustViewBounds="true"
                 android:src="@drawable/konten3"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16sp"
+                android:adjustViewBounds="true"
+                android:src="@drawable/konten1"/>
 
             <ImageView
                 android:layout_width="wrap_content"

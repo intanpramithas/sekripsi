@@ -1,6 +1,8 @@
 package calories.com.Fragments;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -15,12 +17,13 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.material.bottomnavigation.BottomNavigationItemView;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -45,6 +48,8 @@ public class HitungKaloriFragment extends Fragment {
     private TextInputLayout cont_beratbadan, cont_tinggibadan, cont_usia;
     private TextView tv_eror_jeniskelamin;
     private TextView tv_eror_levelaktivitas;
+    private BottomNavigationView bottomNavigationView;
+    private BottomNavigationItemView bottomNavigationItemViewKonsumsiKalori;
 
     public HitungKaloriFragment() {
         // Required empty public constructor
@@ -53,7 +58,8 @@ public class HitungKaloriFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_hitung_kalori, container, false);
+
+        final View v = inflater.inflate(R.layout.fragment_hitung_kalori, container, false);
 
         initView(v);
 
@@ -63,14 +69,15 @@ public class HitungKaloriFragment extends Fragment {
                 if (isValidForm() == true) {
                     hitungKalori();
                 }
+
             }
         });
-
         return v;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+
         super.onViewCreated(view, savedInstanceState);
         setSpinner();
     }
@@ -88,6 +95,13 @@ public class HitungKaloriFragment extends Fragment {
         rb_female = rootView.findViewById(R.id.rb_female);
         tv_eror_jeniskelamin = rootView.findViewById(R.id.tv_eror_jeniskelamin);
         tv_eror_levelaktivitas = rootView.findViewById(R.id.tv_eror_levelaktivitas);
+
+        bottomNavigationView = rootView.findViewById(R.id.bottom_nav_view);
+        bottomNavigationItemViewKonsumsiKalori = rootView.findViewById(R.id.navigation_konsumsikalori);
+
+
+
+
         rg_jeniskelamin = rootView.findViewById(R.id.rg_sex);
 
         rg_jeniskelamin.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener(){
@@ -247,7 +261,8 @@ public class HitungKaloriFragment extends Fragment {
             hasilkalori = BMR;
         }
 
-        Toast.makeText(getActivity(), hasilkalori + "", Toast.LENGTH_SHORT).show();
+        float hasilkaloribaru = (float)Math.round(hasilkalori * 100) / 100;
+//        Toast.makeText(getActivity(), "Kebutuhan kalori tubuh Anda adalah " + hasilkaloribaru +" Kkal", Toast.LENGTH_LONG).show();
 
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("MyPreferences", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -260,6 +275,32 @@ public class HitungKaloriFragment extends Fragment {
         editor.putFloat("Hasil Kalori", (float) hasilkalori);
 
         editor.apply();
+
+
+        AlertDialog alertDialog = new AlertDialog.Builder(getActivity())
+                .create();
+        alertDialog.setCancelable(false);
+        alertDialog.setTitle("Pengumunan");
+        alertDialog.setMessage("Kebutuhan kalori tubuh Anda adalah " + hasilkaloribaru + " Kkal");
+        alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
+
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        alertDialog.show();
+
+//        FragmentManager fm = getFragmentManager();
+//        FragmentTransaction ft = fm.beginTransaction();
+//        KonsumsiKaloriFragment konsumsiKaloriFragment = new KonsumsiKaloriFragment();
+//        ft.replace(R.id.fl_fragment_container, konsumsiKaloriFragment);
+//        ft.commit();
+
+//        FragmentTransaction t = this.getFragmentManager().beginTransaction();
+//        Fragment mFrag = new KonsumsiKaloriFragment();
+//        t.replace(R.id.fl_fragment_container, mFrag);
+//        t.commit();
+
     }
 
 }

@@ -160,7 +160,6 @@
                 android:text="Hitung"
                 android:textColor="@color/white"/>
 
-
         </LinearLayout>
 
     </ScrollView>

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">sumcalories</string>
+    <string name="app_name">MyCalories</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="button_login">Login</string>
@@ -9,7 +9,7 @@
     <string name="tv_login">Login</string>
     <string name="title_home">Home</string>
     <string name="title_hitung">Hitung Kalori</string>
-    <string name="title_konsumsikalori">Kalori Makan</string>
+    <string name="title_konsumsikalori">Catatan Makan</string>
     <string name="title_daftarkalori">Daftar Kalori</string>
 
     <string-array name="tee">

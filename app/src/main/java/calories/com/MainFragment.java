@@ -66,6 +66,7 @@ public class MainFragment extends Fragment {
         });
     }
 
+
     private void switchFragment(Fragment newFragment){
         FragmentTransaction fragmentTransaction = getParentFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.fl_fragment_container, newFragment);

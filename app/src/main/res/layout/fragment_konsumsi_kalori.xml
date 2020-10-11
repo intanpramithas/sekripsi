@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Fragments.KonsumsiKaloriFragment">
+    
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swiperefresh"
@@ -140,7 +141,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="4dp"
                         android:layout_gravity="bottom"
-                        android:text="Kal"
+                        android:text="Kkal"
                         android:textSize="12sp"/>
 
                 </LinearLayout>
@@ -180,7 +181,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="4dp"
-                        android:text="Kal"
+                        android:text="Kkal"
                         android:textSize="12sp"/>
 
                 </LinearLayout>
@@ -202,7 +203,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
-                    android:text="Sudah Makan Apa Saja Hari Ini?"
+                    android:text="Catatan Makan Hari Ini"
                     android:textSize="16sp"
                     android:textStyle="bold"/>
 
@@ -234,7 +235,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Anda sepertinya belum makan pagi"
+                            android:text="Catatan Makan Pagi Anda"
                             android:textSize="12sp"/>
 
                         <com.google.android.material.button.MaterialButton
@@ -287,7 +288,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Anda sepertinya belum makan siang"
+                            android:text="Catatan Makan Siang Anda"
                             android:textSize="12sp"/>
 
                         <com.google.android.material.button.MaterialButton
@@ -341,7 +342,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Anda sepertinya belum makan malam"
+                            android:text="Catatan Makan Malam Anda"
                             android:textSize="12sp"/>
 
                         <com.google.android.material.button.MaterialButton
@@ -395,7 +396,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Anda sepertinya belum makan cemilan hari ini"
+                            android:text="Catatan Konsumsi Snack Anda"
                             android:textSize="12sp"/>
 
                         <com.google.android.material.button.MaterialButton
