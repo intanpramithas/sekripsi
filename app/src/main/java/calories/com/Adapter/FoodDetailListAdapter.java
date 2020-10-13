@@ -79,7 +79,7 @@ public class FoodDetailListAdapter extends RecyclerView.Adapter<FoodDetailListAd
         public void bind(final FoodItem foodItem){
             tvFoodName.setText(foodItem.getName());
             tvFoodDescription.setText(foodItem.getDescription());
-            tvFoodCalory.setText(String.format("%.0f Kalori", foodItem.getCalory()));
+            tvFoodCalory.setText(String.format("%.2f Kkal", foodItem.getCalory()));
             tvFoodTimeEat.setText("Jam Makan : " + foodItem.getTime());
 
             Glide.with(context)

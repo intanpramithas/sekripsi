@@ -71,7 +71,7 @@ public class FoodItemSearchAdapter extends RecyclerView.Adapter<FoodItemSearchAd
         public void bind(final FoodItem foodItem) {
             tvFoodName.setText(foodItem.getName());
             tvFoodDescription.setText(foodItem.getDescription());
-            tvFoodCalory.setText(String.format("%.0f Kalori", foodItem.getCalory()));
+            tvFoodCalory.setText(String.format("%.0f Kkal", foodItem.getCalory()));
 
             Glide.with(context)
                     .load(foodItem.getImageUrl())

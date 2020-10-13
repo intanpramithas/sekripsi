@@ -70,9 +70,9 @@
 
         <ImageView
         android:id="@+id/iv_hapus_food"
-        android:layout_width="60dp"
+        android:layout_width="62dp"
         android:layout_height="60dp"
         android:layout_gravity="center"
-        android:src="@drawable/hapus"/>
+        android:src="@drawable/btn_hapus"/>
 
 </LinearLayout>

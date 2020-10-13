@@ -61,7 +61,7 @@ public class FoodItemListAdapter extends RecyclerView.Adapter<FoodItemListAdapte
         public void bind(FoodItem foodItem){
             tvFoodName.setText(foodItem.getName());
             tvFoodDescription.setText(foodItem.getDescription());
-            tvFoodCalory.setText(String.format("%.0f Kalori", foodItem.getCalory()));
+            tvFoodCalory.setText(String.format("%.0f Kkal", foodItem.getCalory()));
 
 
             Glide.with(context)
